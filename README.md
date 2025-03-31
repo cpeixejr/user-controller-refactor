@@ -10,3 +10,6 @@ My refactoring changes include:
 2 - I created the UserMailerWorker to perform the sending of emails asynchronously using Sidekiq
 
 3 - I changed the previous email API to use the Rails AplicationMailer.
+
+In this [branch](https://github.com/cpeixejr/user-controller-refactor/tree/services-refactoring), I created an approach to use a User registration service.
+Using a service, the controller will deal only with HTTP requests, while the service will deal with the creation process, improving the tests, and the addition of new workflows or features
