@@ -1,16 +1,15 @@
 
 class UserController
   def create
-    @user = User.new(user_params)
+    result = UserRegistrationService.register(user_params)
 
-    if @user.save
-      UserMailerWorker.perform_async(@user.id)
+    if result[:success]
       render json: {
         message: 'User created successfully',
-        user: @user.as_json
+        user: result[:user].as_json
       }, status: :created
     else
-      render json: { error: 'User creation failed', messages: @user.errors.full_messages },
+      render json: { error: 'User creation failed', messages: result[:errors] },
              status: :unprocessable_entity
     end
   end
